@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Sarala:wght@400;700&display=swap');
+
+*{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration:none;
+}
+a{
+    text-decoration: none;
+    font-style: normal;
+    color: white;
+}
+body{
+    font-size: 100%;
+    background-color: #7ab7a0;
+
+}
+main{
+    display: flex;
+    margin-bottom: 48px;
+    border-top: 0.4px solid ;
+    background-color: #7ab7a0;
+    margin-bottom: 48px;
+    border-top: 0.4px solid ;
+    background-color: #7ab7a0;
+}
+header{
+    background-color: #46675b;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    padding:  24px;
+}
+header img {
+    margin-left: 50px;
+    height: 72px;
+}
+header h2{
+    margin-right: 600px;
+    font-size: medium;
+    margin-left: 20px;
+}
+header nav{
+    display: flex;
+    gap: 32px;
+}
+header nav a{
+    color: rgb(232, 232, 233);
+    font-weight: 400;
+    font-size: 18px;
+} 
+.aindex{
+    display: flex;
+    align-items: center;
+
+}
+.anav:hover{
+    font-weight: bolder;
+    text-decoration:underline;
+    font-size: large;
+}
+.pagi{
+    cursor: default;
+    font-weight: bolder;
+    text-decoration:underline;
+    font-size: large;    
+}
+.section2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 80px;
+}
+
+.section2 h3{
+    border-top: 0.4px solid #fff2ef; 
+    padding-top: 30px;
+    font-family:'righteous' , cursive;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff2ef;
+    margin-bottom: 16px;
+}
+.section2 p{
+    font-weight: 400;
+    font-size: 18px;
+    color: #ecd6c4;
+}
+.divmapa{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    border-radius: 20px;
+    padding-bottom: 10px;
+    background-color: #46675b;
+    width: 350px;
+    height: 400px;
+}
+.mapa{
+    width: 300px;
+    height: 350px;
+}
+.divmapa h2{
+    color: white;
+    padding: 10px;
+}
+.redes{
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    height: 450px;
+    background-color: #46675b;
+    flex-direction: column;
+    display: flex;
+    flex: 1;
+    margin: 50px;
+}
+.redes h2{
+    padding: 10px;
+    color: white;
+    align-self: center;
+}
+.whatsapp{
+    padding-top: 50px;
+    padding-bottom: 100px;
+}
+.redes li{
+    padding-left: 30px;
+    align-items: center;
+    display: flex;
+}
+.redes p{
+    font-style: none;
+    text-decoration: none;
+    color: white;
+    padding-left: 10px;
+}
+.redes ul{
+    flex-direction: column;
+    display: flex;
+}
+.redes img{
+    width: 70px;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.form-email {
+    height: 380px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    margin: 20px;
+}
+
+.form-email h2 {
+    font-size: 20px;
+    color: black;
+}
+
+.form-email label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-email input, .form-email textarea {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.form-email input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.form-email input[type="submit"]:hover {
+    width: 100%;
+    background-color: #3e8e41;
+}
+.form-email input[type="submit"]{
+    width: 100%;
+}

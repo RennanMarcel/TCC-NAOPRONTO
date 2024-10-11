@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agendamentos1">
+    <title>Marque sua consulta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/cadastro.css') }}">
+</head>
+<body>
+<header> 
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>Cadastre-se</h2>
+    </a>
+    <nav>
+        <a class="anav" href="{{ url_for('index') }}">Página-Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="anav" href="{{ url_for('fale_conosco') }}">Fale-Conosco</a>
+        <a class="anav" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+</header>  
+<main>
+    <section class="left">
+        <div class="form-div">
+            <h2 style="display: flex; align-items: center; align-self: center; font-size: xx-large;">Cadastre-se</h2>
+            <form action="{{ url_for('cadastro') }}" method="POST">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required> 
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" id="data_nascimento" name="data_nascimento" required>
+                <button type="submit">Cadastrar Paciente</button>
+            </form>                      
+        </div>
+    </section>
+</main>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<footer>
+    <section class="section2">
+        <h3>Quem somos?</h3>
+        <p>Oferecemos atividades gratuitas que fortalecem os laços e melhoram a vida no bairro Agamenon</p>
+        <p>Trabalhamos com profissionais de saúde e direito para garantir que a comunidade tenha acesso aos serviços essenciais</p>
+        <p>Organizamos shows, bazares e aulas de zumba que unem e animam a comunidade.</p>
+    </section>
+</footer>
+</body>
+</html>

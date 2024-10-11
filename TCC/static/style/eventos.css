@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Sarala:wght@400;700&display=swap');
+
+*{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration:none;
+}
+a{
+    text-decoration: none;
+    font-style: normal;
+    color: white;
+}
+body{
+    font-size: 100%;
+    background-color: #7ab7a0;
+
+}
+main{
+    padding: 25px;
+    flex-direction: column;
+    display: flex;
+    margin-bottom: 48px;
+    border-top: 0.4px solid ;
+    background-color: #7ab7a0;
+    margin-bottom: 48px;
+}
+header{
+    background-color: #46675b;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    padding:  24px;
+}
+header img {
+    margin-left: 50px;
+    height: 72px;
+}
+header h2{
+    margin-right: 600px;
+    font-size: medium;
+    margin-left: 20px;
+}
+header nav{
+    display: flex;
+    gap: 32px;
+}
+header nav a{
+    color: rgb(232, 232, 233);
+    font-weight: 400;
+    font-size: 18px;
+} 
+.aindex{
+    display: flex;
+    align-items: center;
+
+}
+.anav:hover{
+    font-weight: bolder;
+    text-decoration:underline;
+    font-size: large;
+}
+.pagi{
+    cursor: default;
+    font-weight: bolder;
+    text-decoration:underline;
+    font-size: large;    
+}
+.section2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 80px;
+}
+
+.section2 h3{
+    font-family: 'righteous', cursive;
+    border-top: 0.4px solid #fff2ef; 
+    padding-top: 30px;
+    font-weight: 400;
+    font-size: 24px;
+    color: #fff2ef;
+    margin-bottom: 16px;
+}
+.section2 p{
+    font-weight: 400;
+    font-size: 18px;
+    color: #ecd6c4;
+}
+.SectionButtons{
+    justify-content: space-around;
+    width: 509px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.SectionButtons button{
+    margin-left: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: rgb(118, 199, 140);
+    width: 200px;
+    height: 75px;
+    border: none;
+    box-shadow: 4px 5px 4px rgb(66, 100, 84) ; 
+    border-radius: 20px;
+    font-family: 'sarala', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: white;
+}
+.SectionButtons button:hover{
+    background-color: rgb(54, 132, 75);
+    width: 195px;
+    height: 70px;
+}
+.eventos-section {
+    text-align: center;
+    padding: 20px;
+}
+.eventos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.evento-card {
+    background-color: #caffde;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px;
+    width: 300px;
+    text-align: left;
+}
+.evento-imagem {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.evento-card h2 {
+    color: #353535;
+    margin: 15px 0;
+    font-size: 24px;
+}
+.evento-card p {
+    font-size: 16px;
+    color: #555;
+}

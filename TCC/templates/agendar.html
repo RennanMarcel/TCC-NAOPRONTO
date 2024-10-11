@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre em contato">
+    <title>Contate-nos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/agendar.css') }}">
+</head>
+
+<body>
+
+<header> 
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>Realize seu agendamento</h2>
+    </a>
+    <nav>
+        <a class="anav" href="{{ url_for('index') }}">Página-Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="anav" href="{{ url_for('fale_conosco') }}">Fale-Conosco</a>
+        <a class="anav" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+ </header>
+    <main>
+
+    <section class="left">
+
+        <form class="agendamento" method="POST" action="{{ url_for('agendar_consulta') }}">
+            <h2>Agendar Consulta</h2>
+            <label for="tipo_consulta">Tipo de Consulta:</label>
+            <select style="padding: 20px;margin: 20px;" name="tipo_consulta" required>
+                <option value="" disabled selected>Selecione o tipo de consulta</option>
+                <option value="Clinico-Geral">Clínico-Geral</option>
+                <option value="Nutricionista">Nutricionista</option>
+                <option value="Fisioterapeuta">Fisioterapeuta</option>
+                <option value="Psicólogo">Psicólogo</option>
+                <option value="Dentista">Dentista</option>
+            </select>
+            <label for="data_hora">Data e hora da consulta:</label>
+            <select style="padding: 20px;margin: 20px;" type="datetime" name="data_hora" required>
+                <option value="" disabled selected>Selecione o tipo de consulta</option>
+                {% for tipo in tipos_consulta %}
+                    {% for data_hora in datas_horas[tipo] %}
+                        <option value="{{ data_hora }}">{{ data_hora }}</option>
+                    {% endfor %}
+                {% endfor %}
+            </select>
+            <button style="padding: 20px;margin: 20px;" type="submit">Agendar</button>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </form>
+        
+    </section>
+
+<section class="right">
+    <div class="perfil">
+        <!-- Se não tiver imagem, exibe o botão para adicionar imagem -->
+        <label id="add-photo-label" class="add-photo-label" for="upload-photo" style="display: none;">Adicionar foto de perfil</label>
+        <!-- Se tiver imagem, exibe o botão para alterar imagem -->
+        <label id="change-photo-label" class="add-photo-label" for="upload-photo" style="display: none;">Alterar foto de perfil</label>
+        <input type="file" id="upload-photo" style="display: none;" accept="image/*" onchange="uploadPhoto()">
+        <img id="profile-pic" style="border-radius: 90px;" src="{{ url_for('static', filename='uploads/' + foto_usuario) }}" alt="Perfil de {{ nome_usuario }}" width="150px"> 
+        <p>{{ nome_usuario }}</p>
+        <button id="verificarbtn">Verificar consultas agendadas</button>
+        <div id="Verificar" style="display: none;">
+            <h2>Consultas Agendadas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo de Consulta</th>
+                    <th>Data da Consulta</th>
+                    <th>Hora da Consulta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consulta in consultas_agendadas %}
+                <tr>
+                    <td>{{ consulta[1] }}</td>
+                    <td>{{ consulta[2] }}</td>
+                    <td>{{ consulta[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button id="close-verificar">Fechar</button>
+        </div>
+    </div>
+</section>
+
+<a href="{{ url_for('horarios') }}" class="aindex">asdsad</a>
+
+</main>
+<footer>
+    <section class="section2">
+    <h3>Quem somos?</h3>
+    <p>Oferecemos atividades gratuitas que fortalecem os laços e melhoram a vida no bairro Agamenon</p>
+    <p>Trabalhamos com profissionais de saúde e direito para garantir que a comunidade tenha acesso aos serviços essenciais</p>
+    <p>Organizamos shows, bazares e aulas de zumba que unem e animam a comunidade.</p>
+    </section>
+</footer>
+</body>
+
+<script>
+    // Busque os horários disponíveis para o tipo de consulta selecionado
+fetch(`/get_horarios?tipo_consulta=${tipoConsulta}`)
+    .then(response => response.json())
+    .then(horarios => {
+        dataHoraSelect.innerHTML = '';
+        const option = document.createElement('option');
+        option.value = '';
+        option.text = 'Selecione a data e o horário';
+        dataHora.Select.appendChild(option);
+        horarios.forEach(horario => {
+            if (horario.disponivel) { // Verifique se o horário está disponível
+                const option = document.createElement('option');
+                const dataHora = new Date(horario.data_hora);
+                const dia = dataHora.getUTCDate();
+                const mes = dataHora.getUTCMonth() + 1;
+                const ano = dataHora.getUTCFullYear();
+                const hora = dataHora.getUTCHours(); 
+                const minutos = dataHora.getUTCMinutes();
+
+                const texto = `${dia}/${mes}/${ano} - ${hora}:${minutos.toString().padStart(2, '0')}`;
+                option.value = horario.id; // id do horário
+                option.text = texto; // data e hora do horário formatadas
+                dataHoraSelect.appendChild(option);
+            }
+        });
+    })
+    .catch(error => console.error('Erro ao carregar horários:', error));
+
+// Função para obter as consultas agendadas do usuário
+function getConsultasAgendadas() {
+    console.log('Chamando getConsultasAgendadas');
+    const nomeUsuario = document.getElementById('profile-pic').alt.split(' ')[1];
+    console.log('Nome do usuário:', nomeUsuario);
+    fetch(`/consultas_agendadas?nome_usuario=${nomeUsuario}`)
+        .then(response => {
+            console.log('Resposta do servidor:', response);
+            return response.json();
+        })
+        .then(consultas => {
+            console.log('Consultas agendadas:', consultas);
+            const verConsultasDiv = document.getElementById('verconsultas');
+            verConsultasDiv.innerHTML = '';
+            consultas.forEach(consulta => {
+                const consultaElement = document.createElement('div');
+                const dataHora = new Date(consulta[1]);
+                const dia = dataHora.getUTCDate();
+                const mes = dataHora.getUTCMonth() + 1;
+                const ano = dataHora.getUTCFullYear();
+                const hora = dataHora.getUTCHours(); 
+                const minutos = dataHora.getUTCMinutes();
+
+                const texto = `${dia}/${mes}/${ano} - ${hora}:${minutos.toString().padStart(2, '0')}`;
+                consultaElement.innerHTML = `
+                    <p>Tipo de Consulta: ${consulta[0]}</p>
+                    <p>Data e Hora: ${texto}</p>
+                `;
+                verConsultasDiv.appendChild(consultaElement);
+            });
+        })
+        .catch(error => console.error('Erro ao obter consultas agendadas:', error));
+}
+
+// Chame a função para obter as consultas agendadas quando a página for carregada
+document.addEventListener('DOMContentLoaded', getConsultasAgendadas);
+
+const tipoConsultaSelect = document.querySelector('select[name="tipo_consulta"]');
+    const dataHoraSelect = document.querySelector('select[name="data_hora"]');
+
+    tipoConsultaSelect.addEventListener('change', () => {
+        const tipoConsulta = tipoConsultaSelect.value;
+        fetch(`/get_horarios?tipo_consulta=${tipoConsulta}`)
+            .then(response => response.json())
+            .then(horarios => {
+                dataHoraSelect.innerHTML = '';
+                const option = document.createElement('option');
+                option.value = '';
+                option.text = 'Selecione a data e o horário';
+                dataHoraSelect.appendChild(option);
+                horarios.forEach(horario => {
+                    const option = document.createElement('option');
+                    const dataHora = new Date(horario[1]);
+                    const dia = dataHora.getUTCDate();
+                    const mes = dataHora.getUTCMonth() + 1;
+                    const ano = dataHora.getUTCFullYear();
+                    const hora = dataHora.getUTCHours(); 
+                    const minutos = dataHora.getUTCMinutes();
+
+                    const texto = `${dia}/${mes}/${ano} - ${hora}:${minutos.toString().padStart(2, '0')}`;
+                    option.value = horario[0]; // id do horário
+                    option.text = texto; // data e hora do horário formatadas
+                    dataHoraSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Erro ao carregar horários:', error));
+    });
+
+document.getElementById('verificarbtn').addEventListener('click', function() {
+                document.getElementById('Verificar').style.display = '';
+            });
+
+            document.getElementById('close-verificar').addEventListener('click', function() {
+                document.getElementById('Verificar').style.display = 'none';
+            });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const profilePic = document.getElementById('profile-pic');
+        const addPhotoLabel = document.getElementById('add-photo-label');
+        const changePhotoLabel = document.getElementById('change-photo-label');
+
+        // Verifica se a imagem de perfil é a padrão
+        if (profilePic.src.includes('default.png')) {
+            addPhotoLabel.style.display = 'block';
+        } else {
+            changePhotoLabel.style.display = 'block';
+        }
+    });
+
+    function uploadPhoto() {
+        const uploadInput = document.getElementById('upload-photo');
+        if (uploadInput.files && uploadInput.files[0]) {
+            const formData = new FormData();
+            formData.append('file', uploadInput.files[0]);
+
+            // Envia a imagem para o backend via Ajax (exemplo com Fetch API)
+            fetch('/upload_photo', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Atualiza a imagem no front-end
+                    document.getElementById('profile-pic').src = data.new_image_url;
+                    alert('Imagem alterada com sucesso!');
+                } else {
+                    alert('Erro ao enviar a imagem.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao enviar a imagem:', error);
+            });
+        }
+    }
+
+</script>
+
+</html>

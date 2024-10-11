@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eventos da comunidade">
+    <title>Eventos - CSC Junior Letal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/eventos.css') }}">
+</head>
+<body>
+<header>
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>CSC Junior Letal</h2>
+    </a>
+    <nav>
+        <a class="anav" href="{{ url_for('index') }}">Página Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="anav" href="{{ url_for('fale_conosco') }}">Fale Conosco</a>
+        <a class="pagi" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+</header>
+
+<main>
+    <section class="eventos-section">
+        <h1>Eventos</h1>
+        <div class="eventos-container">
+            {% if eventos %}
+                {% for evento in eventos %}
+                <div class="evento-card">
+                    <img src="{{ evento[3] }}" alt="{{ evento[0] }}" class="evento-imagem">
+                    <h2>{{ evento[0] }}</h2>
+                    <p><strong>Data:</strong> {{ evento[2] }}</p>
+                    <p>{{ evento[1] }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum evento disponível no momento.</p>
+            {% endif %}
+        </div>
+    </section>
+</main>
+
+<footer>
+    <section class="section2">
+        <h3>Quem somos?</h3>
+        <p>Oferecemos atividades gratuitas que fortalecem os laços e melhoram a vida no bairro Agamenon</p>
+        <p>Trabalhamos com profissionais de saúde e direito para garantir que a comunidade tenha acesso aos serviços essenciais</p>
+        <p>Organizamos shows, bazares e aulas de zumba que unem e animam a comunidade.</p>
+    </section>
+</footer>
+
+</body>
+</html>

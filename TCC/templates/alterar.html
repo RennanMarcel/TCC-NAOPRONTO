@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Alteração de Login e Senha">
+    <title>Alterar Login e Senha</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/alterar.css') }}">
+</head>
+<body>
+<div class="wrapper">
+    <form action="/alterar" method="post">
+        <h1>Alterar Login e Senha</h1>
+        
+        <!-- Campo para alterar o login -->
+        <div class="input-box">
+            <input type="text" name="novo_login" placeholder="Novo Login" required>
+            <i class='bx bxs-user'></i>
+        </div>
+        
+        <!-- Campo para alterar a senha -->
+        <div class="input-box">
+            <input type="password" name="nova_senha" placeholder="Nova Senha" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+
+        <button type="submit" class="btn">Alterar</button>
+    </form>
+</div>
+</body>
+</html>

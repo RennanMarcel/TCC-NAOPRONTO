@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="cuidando do que é nosso">
+    <title>Eventos - CSC Junior Letal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/eventosadm.css') }}">
+</head>
+<body>
+
+<header>
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>CSC Junior Letal</h2>
+    </a>
+    <nav>
+        <a class="anav" href="{{ url_for('index') }}">Página Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="anav" href="{{ url_for('fale_conosco') }}">Fale Conosco</a>
+        <a class="anav" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+</header>
+
+<main>
+
+    <section class="SectionButtons">
+        <button id="create-event-btn" class="create-event-btn">Criar novo evento</button>
+
+        <button id="verify-events-btn" class="verify-events-btn">Verificar eventos</button>
+    </section>
+    <section class="SectionForm">
+
+            <form id="create-event-form" method="POST" enctype="multipart/form-data" style="display: none;" class="create-event-form">
+                
+                <input class="imagem" type="file" name="imagem" accept="image/*" required id="imagem-input" style="display: none;" onchange="updateFileName(this)">
+                <button class="imgs" type="button" onclick="document.getElementById('imagem-input').click()">Selecionar imagem</button>
+                <span id="file-name" style="display: none;"></span>
+                <div class="eventos-container">
+                <div class="create-event-form-div" id="create-event-form-div" style="display: none; flex-direction: column;">
+                <img class="evento-imagem" id="preview-image" src="#" alt="Pré-visualização da Imagem" style="display: none;"/>
+                <input class="nome" type="text" name="nome" placeholder="Nome" required>
+                <input type="date" name="dia" placeholder="Dia" required style="background: none; border: none; margin-bottom: 10px;">
+                <textarea name="descricao" placeholder="Descrição" style="background: none; border: none;"></textarea>
+                </div>
+            </div>
+                <button type="submit" name="create">Criar Evento</button>
+                <button id="close-create-form-btn" class="close-create-form-btn">Fechar</button>
+            </form>
+
+           
+
+        <div id="events-list" style="display: none;">
+            <h2>Eventos Cadastrados</h2>
+            <button id="close-events-btn"   >Fechar</button>
+
+            <div class="eventos-container1">
+                {% if eventos %}
+                    {% for evento in eventos %}
+                    <div class="evento-card1">
+                        <img src="{{ evento[4] }}" alt="{{ evento[4] }}" class="evento-imagem1">
+                        <h2>{{ evento[1] }}</h2>
+                        <p><strong>Data:</strong> {{ evento[2] }}</p>
+                        <p>{{ evento[3] }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Nenhum evento disponível no momento.</p>
+                {% endif %}
+            </div>
+            <ul>
+                {% for evento in eventos %}
+                <li>
+                    
+                    <form action="/eventosadm" method="POST" style="display: inline;" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{ evento[0] }}">
+                        <button type="submit" name="delete">Excluir Evento</button>
+                    </form>
+                    <form action="/eventosadm" method="POST" style="display: inline;" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{{ evento[0] }}">
+                        <input type="text" name="nome" placeholder="Novo Nome" required>
+                        <textarea name="descricao" placeholder="Nova Descrição" required></textarea>
+                        <input type="date" name="dia" placeholder="Novos Dias" required>
+                        
+                        <label for="imagem">Atualizar Imagem:</label>
+                        <input type="file" name="imagem" accept="image/*">
+
+                        <button type="submit" name="update">Atualizar Evento</button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            
+        </div>
+        <script>
+            function updateFileName(input) {
+                const fileName = input.files.length > 0 ? input.files[0].name : '';
+                const fileNameSpan = document.getElementById('file-name');
+                const previewImage = document.getElementById('preview-image');
+
+                if (fileName) {
+                    fileNameSpan.textContent = ``;
+                    fileNameSpan.style.display = 'block';
+
+                    const file = input.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = 'block';
+                    };
+
+                    reader.readAsDataURL(file);
+                } else {
+                    fileNameSpan.style.display = 'none';
+                    previewImage.style.display = 'none';
+                }
+            }
+
+            document.getElementById('create-event-btn').addEventListener('click', function() {
+                document.getElementById('create-event-form').style.display = '';
+                document.getElementById('create-event-form-div').style.display = '';
+            });
+            document.getElementById('verify-events-btn').addEventListener('click', function() {
+                document.getElementById('events-list').style.display = '';
+            });
+
+            document.getElementById('close-events-btn').addEventListener('click', function() {
+                document.getElementById('events-list').style.display = 'none';
+            });
+
+            document.getElementById('close-create-form-btn').addEventListener('click', function() {
+                document.getElementById('create-event-form').style.display = 'none';
+                document.getElementById('create-event-form-div').style.display = 'none';
+            });
+        </script>
+    </section>
+
+</main>
+</body>
+</html>

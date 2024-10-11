@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre em contato">
+    <title>Contate-nos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/contate-nos.css') }}">
+</head>
+
+<body>
+
+<header> 
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>Entre em contato</h2>
+    </a>
+    <nav>
+        <a class="anav" href="{{ url_for('index') }}">Página-Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="pagi" href="{{ url_for('fale_conosco') }}">Fale-Conosco</a>
+        <a class="anav" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+ </header>
+   
+    <main>
+    <section>
+            <div class="divmapa">
+                <h2>Visite-nos</h2>
+                <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.963873000343!2d-35.97804039021107!3d-8.306388991694377!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a98be8e812dfd9%3A0x7b29dc418f5d3c12!2sCentro%20Social%20Comunit%C3%A1rio%20J%C3%BAnior%20Letal!5e0!3m2!1spt-BR!2sbr!4v1723127201544!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+    </section>
+     <section class="redes">
+            <h2>
+                Fale conosco pelas nossas redes sociais
+            </h2>
+            <ul>
+                <li class="whatsapp">
+                   <img src="{{ url_for('static', filename='banco-de-imagens/whatsapp.png') }}" alt="whatsapp"> 
+                   <p>(81) 99673-7061</p>
+                </li>
+                <li class="instagram">
+                    <a href="{{ url_for('instagram') }}"><img src="{{ url_for('static', filename= 'banco-de-imagens/instagram.png')}}" alt="instagram"></a>
+                    <a href="{{ url_for('instagram') }}"><p>@cscjuniorletal</p></a>     
+                </li>
+            </ul>
+            <form class="form-email" action="{{ url_for('send_email') }}" method="POST">
+                <h2>Envie-nos uma mensagem</h2>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required><br><br>
+            
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+            
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" name="mensagem" required></textarea><br><br>
+            
+                <input type="submit" value="Enviar">
+            </form>            
+        </div>
+     </section>
+    </main>
+
+    <footer>
+    <section class="section2">
+    <h3>Quem somos?</h3>
+    <p>Oferecemos atividades gratuitas que fortalecem os laços e melhoram a vida no bairro Agamenon</p>
+    <p>Trabalhamos com profissionais de saúde e direito para garantir que a comunidade tenha acesso aos serviços essenciais</p>
+    <p>Organizamos shows, bazares e aulas de zumba que unem e animam a comunidade.</p>
+    </section>
+    </footer>
+</body>
+</html>

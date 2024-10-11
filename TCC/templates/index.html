@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="cuidando do que é nosso">
+    <title>CSC Junior Letal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+</head>
+
+<body>
+
+<header> 
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>CSC Junior Letal</h2>
+    </a>
+    <nav>
+        <a class="pagi" href="{{ url_for('index') }}">Página-Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="anav" href="{{ url_for('fale_conosco') }}">Fale-Conosco</a>
+        <a class="anav" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+ </header>
+
+<main>
+<section>
+<div class="index">
+ <h1>Seja bem vindo</h1>
+ <h2>Conectando Corações, Transformando Comunidades.</h2>
+ <div style="display: flex;"> 
+<a href="{{ url_for('agendamentos') }}">
+  <button style="width: 200px; height: 80px;">Agende sua consulta</button>
+ </a>
+ <p> &larr; Agende suas consultas médicas aqui!</p>
+</div>
+<a href="{{ url_for('login') }}">
+<button>Administração</button>
+</a>
+ </div>
+<img src="{{ url_for('static', filename='banco-de-imagens/cuidando-removebg-preview.png') }}" alt="cuidando do que é nosso" height="430px">
+</section> 
+
+<section class="section2">
+<h3>Quem somos?</h3>
+<p>Oferecemos atividades gratuitas que fortalecem os laços e melhoram a vida no bairro Agamenon</p>
+<p>Trabalhamos com profissionais de saúde e direito para garantir que a comunidade tenha acesso aos serviços essenciais</p>
+<p>Organizamos shows, bazares e aulas de zumba que unem e animam a comunidade.</p>
+</section>
+ </main>
+<footer>
+<img src="{{ url_for('static', filename='banco-de-imagens/trocar.jpg') }}" width="200px" height="30px">
+</footer>
+
+</body>
+</html>

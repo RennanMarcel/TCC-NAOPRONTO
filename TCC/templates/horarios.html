@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Criar horários">
+    <title>Criar Horários</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/agendar.css') }}">
+</head>
+
+<body>
+
+<header> 
+    <a href="{{ url_for('index') }}" class="aindex">
+        <img src="{{ url_for('static', filename='banco-de-imagens/logo-removebg-preview.png') }}" alt="Centro Social Comunitário Junior Letal" width="100px">
+        <h2>Criar Horários</h2>
+    </a>
+    <nav>
+        <a class="anav" href="{{ url_for('index') }}">Página-Principal</a>  
+        <a class="anav" href="{{ url_for('agendamentos') }}">Agendamentos</a>
+        <a class="anav" href="{{ url_for('fale_conosco') }}">Fale-Conosco</a>
+        <a class="anav" href="{{ url_for('eventos') }}">Eventos</a>
+    </nav>
+ </header>
+    <main>
+
+    <section class="left">
+
+        <form class="horarios" method="POST" action="{{ url_for('create_horarios') }}">
+            <h2>Criar Horários</h2>
+            <label for="tipo_consulta">Tipo de Consulta:</label>
+            <select style="padding: 20px;margin: 20px;" name="tipo_consulta" required>
+                <option value="" disabled selected>Selecione o tipo de consulta</option>
+                <option value="Clinico-Geral">Clínico-Geral</option>
+                <option value="Nutricionista">Nutricionista</option>
+                <option value="Fisioterapeuta">Fisioterapeuta</option>
+                <option value="Psicólogo">Psicólogo</option>
+                <option value="Dentista">Dentista</option>
+            </select>
+            <label for="data_hora">Data e hora:</label>
+            <input style="padding: 20px;margin: 20px;" type="datetime-local" name="data_hora" required>
+            <label for="disponivel">Disponível:</label>
+            <input style="padding: 20px;margin: 20px;" type="checkbox" name="disponivel" value="1">
+            <button style="padding: 20px;margin: 20px;" type="submit">Criar Horário</button>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </form>
+        
+    </section>
+
+</main>
+<footer>
+    <section class="section2">
+    <h3>Quem somos?</h3>
+    <p>Oferecemos atividades gratuitas que fortalecem os laços e melhoram a vida no bairro Agamenon</p>
+    <p>Trabalhamos com profissionais de saúde e direito para garantir que a comunidade tenha acesso aos serviços essenciais</p>
+    <p>Organizamos shows, bazares e aulas de zumba que unem e animam a comunidade.</p>
+    </section>
+</footer>
+</body>
+
+</html>
